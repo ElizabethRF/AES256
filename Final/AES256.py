@@ -57,9 +57,14 @@ class Encryptor:
 					fo.write(encripted)
 				return 'Done'
 			else: 
-				new_name = new_name.split("/")
-				name = where_to_save + '/'+ new_name[len(new_name)-1]
-				with open(new_name[0] + ".cfr." + new_name[1], 'wb') as fo:
+				print("where to save")
+				print(where_to_save)
+				new = new_name[0].split("/")
+				print()
+				name = where_to_save + '/'+ new[len(new)-1]
+				print("name")
+				print(name)
+				with open(name + ".cfr." + new_name[1], 'wb') as fo:
 					fo.write(encripted)
 				return 'Done'
 		except: 

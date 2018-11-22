@@ -32,8 +32,19 @@ root = Tk()
 root.directory = filedialog.askdirectory()
 print (root.directory)
 '''
-
+'''
 import re
 
 print(bool(re.match('^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!#$?])', 'hasalAhanum2a?')))
 print(bool(re.match('^(?=.*[0-9])(?=.*[a-zA-Z]$)', 'some string')))
+'''
+
+from tkinter import Text, Tk
+
+r = Tk()
+r.geometry("400x400")
+
+t = Text(r, height=20, width=40)
+t.pack()
+
+r.mainloop()

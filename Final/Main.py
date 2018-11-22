@@ -17,8 +17,6 @@ class Menu:
 		var = encriptor.encrypt_file(str(file_name),str(where_to_save))
 		if del_original == 1: 
 			encriptor.deleteFile(file_name)
-		else:
-			print("else")
 			#indicar donde guardar el archivo 
 		return var
 

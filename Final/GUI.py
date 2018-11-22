@@ -36,6 +36,9 @@ def hide_pass(event,label):
 def delete_values(entryRes): 
 	entryRes.delete(0, 'end')
 
+def delete_values_text(entryRes):
+	entryRes.delete('1.0',END)
+
 #Llamado a clase para cifrar texto
 def cifrar_texto(event,text, passw,entryRes):
 	if text == '' or passw == '': 
@@ -46,8 +49,8 @@ def cifrar_texto(event,text, passw,entryRes):
 			if res == 'ERROR_1234':
 				mistaken_fields()
 			else: 
-				entryRes.delete(0, 'end')
-				entryRes.insert(0,res)
+				entryRes.delete('1.0',END)
+				entryRes.insert('1.0',res)
 		else:
 			warning_pass()
 
@@ -60,8 +63,8 @@ def des_texto(event,text, password, entryRes):
 		if res == 'ERROR_1234':
 			mistaken_fields()
 		else: 
-			entryRes.delete(0, 'end')
-			entryRes.insert(0, res)
+			entryRes.delete('1.0',END)
+			entryRes.insert('1.0',res)
 
 #llamado a clase para cifrar archivo 
 def cifrar_archivo(event,file_root,password, del_original):
@@ -174,8 +177,8 @@ class CifText(tk.Frame):
 
 		#Texto a cifrar 
 		LT = tk.Label(self,text="Texto a cifrar")
-		textEnt = tk.Entry(self)
-		delete_values(textEnt)
+		#textEnt = tk.Entry(self)
+		textEnt = tk.Text(self, height=20, width=40)
 		LT.pack()
 		textEnt.pack()
 
@@ -194,7 +197,7 @@ class CifText(tk.Frame):
 
 		#Cifrar
 		BCifrar = tk.Button(self,text="Cifrar")
-		BCifrar.bind('<Button-1>',lambda a:cifrar_texto(a,textEnt.get(),passEnt.get(),textEnt))
+		BCifrar.bind('<Button-1>',lambda a:cifrar_texto(a,textEnt.get("1.0",END),passEnt.get(),textEnt))
 		BCifrar.pack()
 
 		#Menu principal 
@@ -241,6 +244,8 @@ class CifFile(tk.Frame):
 		checkVar = IntVar()
 		Bcheck = tk.Checkbutton(self,text="Borrar original" ,variable=checkVar)
 		Bcheck.pack()
+		LBorrar = tk.Label(self,text="Si se selecciona \n Borrar original: el archivo encriptado se guarda en la ubicación del archivo original \n No borrar original: Se abre una ventana para seleccional la ruta donde se guardará el archivo")
+		LBorrar.pack()
 
 		#Cifrar button 
 		BCifrar = tk.Button(self,text="Cifrar")
@@ -262,7 +267,8 @@ class DecText(tk.Frame):
 
 		#Texto a descifrar 
 		LT = tk.Label(self,text="Texto a descifrar")
-		textEnt = tk.Entry(self)
+		#textEnt = tk.Entry(self)
+		textEnt = tk.Text(self, height=20, width=40)
 		LT.pack()
 		textEnt.pack()
 
@@ -280,7 +286,7 @@ class DecText(tk.Frame):
 
 		#Descifrar botón 
 		BDCifrar = tk.Button(self,text="Descifrar")
-		BDCifrar.bind('<Button-1>',lambda a:des_texto(a,textEnt.get(),passEnt.get(),textEnt))
+		BDCifrar.bind('<Button-1>',lambda a:des_texto(a,textEnt.get('1.0',END),passEnt.get(),textEnt))
 		BDCifrar.pack()
 
 		#Menu principal 
